@@ -14,16 +14,34 @@ def main():
   print("Screen width: 1280")
   print("Screen height: 720")
 
+  # Create groups
+  updatable = []
+  drawable = []
+
   player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+  updatable.append(player)
+  drawable.append(player)
 
   running = True
-  while True:
+  while running:
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         running = False
 
     screen.fill((0, 0, 0))  # fill the screen with black
-    player.draw(screen)
+
+    # Update all updatables
+
+    for obj in updatable:
+      obj.update(dt)
+
+    # Draw all drawables
+
+    for obj in drawable:
+      obj.draw(screen)
+    
+    #player.update(dt)
+    #player.draw(screen)
     pygame.display.flip()   # update the full display
 
     dt = clock.tick(60) / 1000
