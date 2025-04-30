@@ -21,14 +21,15 @@ def main():
   # Create groups
   updatable = []
   drawable = []
-  asteroid = []
+  asteroids = []
 
   
 
-  Asteroid.containers = (asteroid, updatable, drawable)
-  AsteroidField.containers = (updatable)
-  player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-  field = AsteroidField()
+  Asteroid.containers = (asteroids, updatable, drawable)
+  AsteroidField.containers = (updatable,)
+
+  player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2) # Create player and add to groups
+  
   updatable.append(player)
   drawable.append(player)
 
@@ -42,7 +43,7 @@ def main():
 
     screen.fill((0, 0, 0))  # fill the screen with black
 
-    # Update all updatables
+    # Update all objects
 
     for obj in updatable:
         obj.update(dt)
@@ -52,8 +53,7 @@ def main():
     for obj in drawable:
         obj.draw(screen)
     
-    player.update(dt)
-    player.draw(screen)
+ 
     pygame.display.flip()   # update the full display
 
     dt = clock.tick(60) / 1000
