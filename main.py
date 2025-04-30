@@ -19,9 +19,9 @@ def main():
   print("Screen height: 720")
 
   # Create groups
-  updatable = []
-  drawable = []
-  asteroids = []
+  updatable = pygame.sprite.Group()
+  drawable = pygame.sprite.Group()
+  asteroids = pygame.sprite.Group()
 
   
 
