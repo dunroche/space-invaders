@@ -2,7 +2,6 @@ import pygame
 from constants import *
 from player import Player
 from circleshape import CircleShape
-from constants import PLAYER_RADIUS
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 
@@ -18,22 +17,27 @@ def main():
   print("Screen width: 1280")
   print("Screen height: 720")
 
-  # Create groups
+  # Create sprite groups
   updatable = pygame.sprite.Group()
   drawable = pygame.sprite.Group()
   asteroids = pygame.sprite.Group()
 
   
-
+  # Set containers class attributes
   Asteroid.containers = (asteroids, updatable, drawable)
   AsteroidField.containers = (updatable,)
 
+  # Create player and field
+
   player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2) # Create player and add to groups
   
-  updatable.append(player)
-  drawable.append(player)
-
   field = AsteroidField()
+
+  # Add player to relevant groups
+  updatable.add(player)
+  drawable.add(player)
+   
+
 
   running = True
   while running:
@@ -43,13 +47,9 @@ def main():
 
     screen.fill((0, 0, 0))  # fill the screen with black
 
-    # Update all objects
-
-    for obj in updatable:
-        obj.update(dt)
-
-    # Draw all drawables
-
+    
+    # Update and draw
+    updatable.update(dt)
     for obj in drawable:
         obj.draw(screen)
     
