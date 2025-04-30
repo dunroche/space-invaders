@@ -3,6 +3,10 @@ from constants import *
 from player import Player
 from circleshape import CircleShape
 from constants import PLAYER_RADIUS
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
+
+
 
 def main():
   pygame.init()
@@ -17,10 +21,18 @@ def main():
   # Create groups
   updatable = []
   drawable = []
+  asteroid = []
 
+  
+
+  Asteroid.containers = (asteroid, updatable, drawable)
+  AsteroidField.containers = (updatable)
   player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+  field = AsteroidField()
   updatable.append(player)
   drawable.append(player)
+
+  field = AsteroidField()
 
   running = True
   while running:
@@ -33,15 +45,15 @@ def main():
     # Update all updatables
 
     for obj in updatable:
-      obj.update(dt)
+        obj.update(dt)
 
     # Draw all drawables
 
     for obj in drawable:
-      obj.draw(screen)
+        obj.draw(screen)
     
-    #player.update(dt)
-    #player.draw(screen)
+    player.update(dt)
+    player.draw(screen)
     pygame.display.flip()   # update the full display
 
     dt = clock.tick(60) / 1000
