@@ -6,7 +6,7 @@ class Asteroid(CircleShape):
         super().__init__(x, y, radius)
         if hasattr(self.__class__, "containers"):
             for group in self.__class__.containers:
-                group.append(self)
+                group.add(self)
 
 
     def draw(self, screen):
