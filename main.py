@@ -4,6 +4,8 @@ from player import Player
 from circleshape import CircleShape
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+from constants import PLAYER_RADIUS
+
 
 
 
