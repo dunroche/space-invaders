@@ -52,13 +52,20 @@ def main():
     
     # Update and draw
     updatable.update(dt)
+
+    for asteroid in asteroids:
+       if player.collides_with(asteroid):
+          print("Game over!")
+          pygame.quit()
+          exit()
+    # Draw everything
     for obj in drawable:
         obj.draw(screen)
     
  
-    pygame.display.flip()   # update the full display
-
+    pygame.display.flip() 
     dt = clock.tick(60) / 1000
+
   pygame.quit()
 
 if __name__ == "__main__":
