@@ -1,7 +1,7 @@
 import pygame
 from constants import *
 from player import Player
-from circleshape import CircleShape
+from circleshape import CircleShape, Shot
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from constants import PLAYER_RADIUS
@@ -35,9 +35,12 @@ def main():
   
   field = AsteroidField()
 
+  shot = pygame.sprite.Group()
+
   # Add player to relevant groups
   updatable.add(player)
   drawable.add(player)
+  Shot.containers = (shot, updatable, drawable)
    
 
 
@@ -58,6 +61,19 @@ def main():
           print("Game over!")
           pygame.quit()
           exit()
+
+    for asteroid in asteroids:
+       for bullet in shot:
+           if bullet.collides_with(asteroid):
+              asteroid.split()
+              bullet.kill()
+
+    for asteroid in asteroids:
+       if player.collides_with(asteroid):
+          print("Game over!")
+          pygame.quit()
+          exit()
+
     # Draw everything
     for obj in drawable:
         obj.draw(screen)
